@@ -1,0 +1,113 @@
+﻿<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Shopping Cart</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Item</td>
+                        <td class="description"></td>
+                        <td class="price">Price</td>
+                        <td class="quantity">Quantity</td>
+                        <td class="total">Total</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (CartItem item in ViewBag.CartItem)
+                    {
+                        <tr>
+                            <td class="cart_product">
+                                <a href=""><img style="width:110px;height:110px;" src="~/images/shop/@item.Product.Image" alt=""></a>
+                            </td>
+                            <td class="cart_description">
+                                <h5><a href="">@item.Product.ProductName</a></h5>
+                            </td>
+                            <td class="cart_price">
+                                <input type="hidden" value=@item.Product.Price class="c_price_@item.Product.ProductId">
+                                <p>$@item.Product.Price</p>
+                            </td>
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    <input data-id="@item.Product.ProductId" class="cart_quantity_input c_quantity_@item.Product.ProductId" style="margin-bottom:10px;width:50px;" type="number" min="1" name="quantity" value="@item.Quantity" autocomplete="off" size="2">
+                                </div>
+                            </td>
+                            <td class="cart_total">
+                                @{
+                                    var amount = item.Quantity * item.Product.Price;
+                                }
+                                <p class="cart_total_price c_total_@item.Product.ProductId">$@amount</p>
+                            </td>
+                            <td class="cart_delete">
+                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section id="do_action">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="total_area">
+                    <ul>
+                        @{
+                            double total = 0;
+                            foreach (CartItem item in ViewBag.CartItem)
+                            {
+                                total += item.Quantity * item.Product.Price;
+                            }
+                        }
+                        <li>Cart Sub Total <span class="all_total">$@total</span></li>
+                        <li>Shipping Cost <span>Free</span></li>
+                        <li>Total <span class="all_total">$@total</span></li>
+                    </ul>
+                    <a class="btn btn-default check_out" href="">Check Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--/#do_action-->
+@section scripts {
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            $(".cart_quantity_input").change(function () {
+                $.ajax({
+                    url: "/Home/ChangeCart",
+                    data: {
+                        id: $(this).data("id"),
+                        quantity: $(".c_quantity_" + $(this).data("id")).val()
+                    },
+                    success: function (data) {
+                        var id = data.pid;
+                        console.log(data);
+                        var quantity = $(".c_quantity_" + id).val();
+                        var price = $(".c_price_" + id).val();
+                        console.log(quantity);
+                        console.log(price);
+                        $(".c_total_" + id).html(quantity * price);
+                        $(".all_total").html(data.total);
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!'
+                        })
+                    }
+
+                });
+            });
+        });
+    </script>
+}

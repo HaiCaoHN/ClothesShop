@@ -1,39 +1,43 @@
 ﻿@{
     Layout = "_Layout";
 }
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-1">
+                <div class="login-form">
+                    <!--login form-->
+                    <h2>Login to your account</h2>
+                    <form asp-controller="Login" asp-action="Login" method="post">
+                        <input type="text" name="name" placeholder="Name" />
+                        <input type="password" name="pass" placeholder="Password" />
 
-<div class="container">
-			<div class="row">
-				<div class="col-sm-4 col-sm-offset-1">
-					<div class="login-form"><!--login form-->
-						<h2>Login to your account</h2>
-						<form asp-controller="Login" asp-action="Login" method="post">
-							<input type="text" name="name" placeholder="Name" />
-							<input type="password" name="pass" placeholder="Password" />
-							
-							<button type="submit" class="btn btn-default">Login</button>
-							<span>
-								@ViewBag.MessSignIn
-							</span>
-						</form>
-					</div><!--/login form-->
-				</div>
-				<div class="col-sm-1">
-					<h2 class="or">OR</h2>
-				</div>
-				<div class="col-sm-4">
-					<div class="signup-form"><!--sign up form-->
-						<h2>New User Signup!</h2>
-						<form asp-controller="Login" asp-action="SignUp" method="post">
-							<input type="text" name="name" placeholder="Username"/>
-							<input type="password" name="pass" placeholder="Password"/>
-							<input type="password" name="repass" placeholder="Re-enter Password"/>
-							<button type="submit" class="btn btn-default">Signup</button>
-					<span>
-						@ViewBag.MessSignUp
-					</span>
-						</form>
-					</div><!--/sign up form-->
-				</div>
-			</div>
-		</div>
+                        <button type="submit" class="btn btn-default">Login</button>
+                        <span>
+                            @ViewBag.MessSignIn
+                        </span>
+                    </form>
+                </div><!--/login form-->
+            </div>
+            <div class="col-sm-1">
+                <h2 class="or">OR</h2>
+            </div>
+            <div class="col-sm-4">
+                <div class="signup-form">
+                    <!--sign up form-->
+                    <h2>New User Signup!</h2>
+                    <form asp-controller="Login" asp-action="SignUp" method="post">
+                        <input type="text" name="name" placeholder="Username" />
+                        <input type="text" name="dname" placeholder="DisplayName" />
+                        <input type="password" name="pass" placeholder="Password" />
+                        <input type="password" name="repass" placeholder="Re-enter Password" />
+                        <button type="submit" class="btn btn-default">Signup</button>
+                        <span>
+                            @ViewBag.MessSignUp
+                        </span>
+                    </form>
+                </div><!--/sign up form-->
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.Models;
-
+using Project.Extensions;
 namespace Project.Controllers
 {
     public class LoginController : Controller
     {
+
         [HttpPost]
         public IActionResult Login(string name, string pass)
         {
@@ -19,7 +20,8 @@ namespace Project.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    HttpContext.Session.Set("user", user);
+                    return RedirectToAction("Index","Home");
                 }
 
             }
@@ -31,8 +33,13 @@ namespace Project.Controllers
             return View();
         }
 
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("user");
+            return RedirectToAction("Index", "Home");
+        }
         [HttpPost]
-        public IActionResult SignUp(string name, string pass, string repass)
+        public IActionResult SignUp(string name, string pass, string repass, string dname)
         {
             using (Project_PRNContext context = new Project_PRNContext())
             {
@@ -43,12 +50,13 @@ namespace Project.Controllers
                     if (!pass.Equals(repass))
                     {
                         ViewBag.MessSignUp = "Re-password not match origin password!";
-                        return RedirectToAction("Index");
+                        return View("Login");
                     }
                     User u = new User()
                     {
                         UserName = name,
-                        Password = pass
+                        Password = pass,
+                        DisplayName = dname
                     };
                     context.Users.Add(u);
                     context.SaveChanges();
@@ -56,9 +64,10 @@ namespace Project.Controllers
                 else
                 {
                     ViewBag.MessSignUp = "Username existed!";
-                    return RedirectToAction("Index");
+                    return View("Login");
                 }
-                return View();
+                ViewBag.MessSignUp = "SignUp Successfully!";
+                return View("Login");
             }
         }
     }

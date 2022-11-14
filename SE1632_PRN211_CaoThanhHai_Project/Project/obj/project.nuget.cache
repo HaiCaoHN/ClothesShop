@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7qTolxVJdqMX+gOaIPQnAV8bBiVRxGEqOwAeHlA2fe5ezbH9Q8JWIEqFr4Pv0yeczBVu1L9JBYrBkXxX7mKdbA==",
+  "dgSpecHash": "/zkyz+mYUSLj4qOe/KgRgWblP9mi3/3oF/y8DyAEove8fb6Wcc1DapxkgoCMJTV+DISTIo9GI5nytYn3PqDqLw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mavjp\\Downloads\\Documents\\PRN211\\Project\\SE1632_PRN211_CaoThanhHai_Project\\Project\\Project.csproj",
+  "projectFilePath": "C:\\Users\\mavjp\\Documents\\GitHub\\ClothesShop\\SE1632_PRN211_CaoThanhHai_Project\\Project\\Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mavjp\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mavjp\\.nuget\\packages\\jetbrains.annotations\\2022.1.0\\jetbrains.annotations.2022.1.0.nupkg.sha512",

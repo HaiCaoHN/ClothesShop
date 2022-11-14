@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -13,15 +14,16 @@
     <link href="~/css/animate.css" rel="stylesheet">
     <link href="~/css/main.css" rel="stylesheet">
     <link href="~/css/responsive.css" rel="stylesheet">
+    
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="~/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
 
 <body>
@@ -66,8 +68,27 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a asp-controller="Login" asp-action="Login"><i class="fa fa-lock"></i> Login</a></li>
+                                @{
+                                    var user = Context.Session.Get<User>("user");
+                                    var cart = Context.Session.Get<List<CartItem>>("Cart");
+                                    if (cart == null)
+                                    {
+                                        cart = new List<CartItem>();
+                                    }
+                                }
+                                @if (user != null)
+                                {
+                                    <li><a asp-controller="Home" asp-action="CartItem"><i class="fa fa-shopping-cart"></i> Cart
+                                        <span id="cart-count">(@cart.Sum(p=>p.Quantity))</span>
+                                        </a></li>
+                                    
+                                    <li><a href="#"><i class="fa"></i>Hello @user.DisplayName</a></li>
+                                    <li><a asp-controller="Login" asp-action="LogOut"><i class="fa fa-lock"></i>Logout</a></li>
+                                }
+                                else {
+                                    <li><a asp-controller="Login" asp-action="Login"><i class="fa fa-lock"></i> Login</a></li>
+                                }
+
                             </ul>
                         </div>
                     </div>
@@ -90,18 +111,18 @@
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="/" class="active">Home</a></li>
+                                <li><a asp-controller="Home" asp-action="Index" class="active">Home</a></li>
                             </ul>
                         </div>
                     </div>
                     <form asp-controller="Home" asp-action="Index" method="get">
                         <div class="col-sm-3">
-                                <input name="search" type="text" placeholder="Search" />
-                            <input type="submit" value="Search" />
+                            <input name="search" style="height:30px;margin-top:2px;" type="text" placeholder="Search" />
+                            <input type="submit" class="btn btn-default" value="Search" />
                         </div>
                         @if (ViewBag.Cate != null)
                         {
-                            <input type="hidden" name="cate" value=@ViewBag.Cate/>
+                            <input type="hidden" name="cate" value=@ViewBag.Cate />
                         }
                     </form>
                 </div>
@@ -109,14 +130,12 @@
         </div>
     </header>
 
-    <section>
-        @RenderBody();
-    </section>
+    <!--Body-->
+        @RenderBody()
+    <!--Body-->
 
     <footer id="footer">
         <!--Footer-->
-
-
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
@@ -125,7 +144,6 @@
                 </div>
             </div>
         </div>
-
     </footer><!--/Footer-->
     <script src="~/js/jquery.js"></script>
     <script src="~/js/price-range.js"></script>
@@ -133,5 +151,7 @@
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/jquery.prettyPhoto.js"></script>
     <script src="~/js/main.js"></script>
+    <script src="~/js/jquery-3.6.1.min.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -2877,11 +2877,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mavjp\\Downloads\\Documents\\PRN211\\Project\\SE1632_PRN211_CaoThanhHai_Project\\Project\\Project.csproj",
+      "projectUniqueName": "C:\\Users\\mavjp\\Documents\\GitHub\\ClothesShop\\SE1632_PRN211_CaoThanhHai_Project\\Project\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "C:\\Users\\mavjp\\Downloads\\Documents\\PRN211\\Project\\SE1632_PRN211_CaoThanhHai_Project\\Project\\Project.csproj",
+      "projectPath": "C:\\Users\\mavjp\\Documents\\GitHub\\ClothesShop\\SE1632_PRN211_CaoThanhHai_Project\\Project\\Project.csproj",
       "packagesPath": "C:\\Users\\mavjp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mavjp\\Downloads\\Documents\\PRN211\\Project\\SE1632_PRN211_CaoThanhHai_Project\\Project\\obj\\",
+      "outputPath": "C:\\Users\\mavjp\\Documents\\GitHub\\ClothesShop\\SE1632_PRN211_CaoThanhHai_Project\\Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mavjp\\AppData\\Roaming\\NuGet\\NuGet.Config",
