@@ -1,0 +1,95 @@
+﻿@page
+@model PRN221_haicthe163677_FinalProject.Pages.Dashboard.IndexModel
+
+@{
+    Layout = "~/Pages/Shared/_LayoutDashboard.cshtml";
+    ViewData["Title"] = "Index";
+}
+
+<h1>Product Information</h1>
+<div class="row">
+    <div class="col-md-7">
+        <form asp-page="./Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    <input type="text" name="searchString" value="@Model.currentSearch" />
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-5 float-end">
+        <a asp-page="Create" class="btn btn-secondary float-end">Add New</a>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Desciption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Product)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desciption)
+                </td>
+                <td>
+                    <img style="height:225px; width:235px" class="img-fluid" src="~/img/product/@item.Image" alt="">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ProductId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ProductId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ProductId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.Product.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Product.HasNextPage ? "disabled" : "";
+}
+
+<div style="margin-bottom:10px">
+    <a asp-page="./Index"
+       asp-route-pageIndex="@(Model.Product.PageIndex - 1)"
+       asp-route-currentFilter="@Model.currentSearch"
+       class="btn btn-primary @prevDisabled">
+        Previous
+    </a>
+    <a asp-page="./Index"
+       asp-route-pageIndex="@(Model.Product.PageIndex + 1)"
+       asp-route-currentFilter="@Model.currentSearch"
+       class="btn btn-primary @nextDisabled">
+        Next
+    </a>
+</div>

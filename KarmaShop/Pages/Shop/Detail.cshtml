@@ -1,0 +1,74 @@
+﻿@page
+@model KarmaShop.Pages.Shop.DetailModel
+@{
+    var product = Model.ProductDetail;
+}
+<!--================Single Product Area =================-->
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+    <div class="container">
+        <div class="row s_product_inner">
+            <div class="col-lg-6">
+                <img style="width:100%; height:auto" class="img-fluid" src="~/img/product/@product.Image" alt="">
+            </div>
+            <div class="col-lg-5 offset-lg-1">
+                <div class="s_product_text">
+                    <h3>@product.ProductName</h3>
+                    <h2>$@product.Price</h2>
+                    <ul class="list">
+                        <li><a  class="active" href="#"><span>Category:</span>  @product.Category.CategoryName</a></li>
+                    </ul>
+                    <p>
+                        @product.Desciption
+                    </p>
+                    <div class="product_count">
+                        <label for="qty">Quantity:</label>
+                        <input type="number" name="qty"  id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                    </div>
+                    <div class="card_area d-flex align-items-center">
+                        <a data-id="@product.ProductId" class="primary-btn ajax-add-cart" href="#">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 30px">
+</div>
+<!--================End Single Product Area =================-->
+@section scripts {
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            $(".ajax-add-cart").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/Shop/Index?handler=Cart",
+                    data: {
+                        id: $(this).data("id"),
+                        type: "ajax",
+                        amount: $(".qty").val(),
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Add to cart successfull !',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        $("#cart-count").html("(" + data + ")");
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'You need to login first!'
+                        })
+                    }
+
+                });
+            });
+        });
+    </script>
+}

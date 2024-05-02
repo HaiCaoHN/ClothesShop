@@ -1,0 +1,137 @@
+﻿@page
+
+@model PRN221_haicthe163677_FinalProject.Pages.Carts.IndexModel
+@{
+}
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.UserCart)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="/img/product/@item.Product.Image" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <p>@item.Product.ProductName</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="hidden" value=@item.Product.Price class="c_price_@item.Product.ProductId">
+                                    <h5 class="">$@item.Product.Price</h5>
+                                </td>
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button">
+                                        <input data-id="@item.Product.ProductId" class="cart_quantity_input c_quantity_@item.Product.ProductId" style="margin-bottom:10px;width:50px;" type="number" min="1" name="quantity" value="@item.Quantity" autocomplete="off" size="2">
+                                    </div>
+                                </td>
+                                <td>
+                                    @{
+                                        var amount = item.Quantity * item.Product.Price;
+                                    }
+                                    <h5 class="cart_total_price c_total_@item.Product.ProductId">$@amount</h5>
+                                </td>
+                                <td>
+                                <a class="btn btn-danger remove-cart" asp-page-handler="Remove" asp-route-id="@item.Id">Remove</a>
+                                </td>
+                            </tr>
+                        }
+                        @{
+                            double? total = 0;
+                            foreach (CartItem item in Model.UserCart)
+                            {
+                                total += item.Quantity * item.Product.Price;
+                            }
+                        }
+                        <tr class="bottom_button">
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td></td>
+                            <td>
+                                <h5>Subtotal: <span class="all_total">$@total</span></h5>
+                            </td>
+                        </tr>
+                        <tr class="bottom_button">
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td></td>
+                            <td>
+                            </td>
+                            <td>
+                                <a class="gray_btn checkout" style="cursor: pointer;">Checkout</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->
+@section scripts {
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            $(".cart_quantity_input").on("input", function () {
+                $.ajax({
+                    url: "/Carts/Index?handler=Change",
+                    data: {
+                        id: $(this).data("id"),
+                        quantity: $(".c_quantity_" + $(this).data("id")).val(),
+                        type: "ajax"
+                    },
+                    success: function (data) {
+                        var id = data.productId;
+                        console.log(data);
+                        var quantity = $(".c_quantity_" + id).val();
+                        var price = $(".c_price_" + id).val();
+                        console.log(id);
+                        $(".c_total_" + id).html("$" + quantity * price);
+                        $(".all_total").html("$" + data.total);
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!'
+                        })
+                    }
+
+                });
+            });
+        });
+
+        $(document).ready(function () {
+                    $(".checkout").click(function () {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Checkout success!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    });
+                });
+    </script>
+}

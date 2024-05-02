@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "VZwEuTisKwFZsePVq/Ic/0/+TP+b5jaC7ZQ76jQcSAA=",
+  "Source": "ApiManagement",
+  "BasePath": "_content/ApiManagement",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

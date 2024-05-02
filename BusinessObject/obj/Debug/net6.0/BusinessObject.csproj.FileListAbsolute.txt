@@ -1,0 +1,14 @@
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\obj\Debug\net6.0\BusinessObject.csproj.AssemblyReference.cache
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\obj\Debug\net6.0\BusinessObject.GeneratedMSBuildEditorConfig.editorconfig
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\obj\Debug\net6.0\BusinessObject.AssemblyInfoInputs.cache
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\obj\Debug\net6.0\BusinessObject.AssemblyInfo.cs
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\obj\Debug\net6.0\BusinessObject.csproj.CoreCompileInputs.cache
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\bin\Debug\net6.0\BusinessObject.deps.json
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\bin\Debug\net6.0\BusinessObject.dll
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\bin\Debug\net6.0\BusinessObject.pdb
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\obj\Debug\net6.0\BusinessObject.dll
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\obj\Debug\net6.0\refint\BusinessObject.dll
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\obj\Debug\net6.0\BusinessObject.pdb
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\obj\Debug\net6.0\ref\BusinessObject.dll
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\bin\Debug\net6.0\BusinessObject.runtimeconfig.json
+D:\source_code\c#\Project_PRN231_HE163677\BusinessObject\obj\Debug\net6.0\BusinessObject.genruntimeconfig.cache

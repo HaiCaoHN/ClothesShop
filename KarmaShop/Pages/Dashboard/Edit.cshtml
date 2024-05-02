@@ -1,0 +1,60 @@
+﻿@page
+@model PRN221_haicthe163677_FinalProject.Pages.Dashboard.EditModel
+
+@{
+    Layout = "~/Pages/Shared/_LayoutDashboard.cshtml";
+
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Product</h4>
+<div>
+    <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <span></span>
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Product.ProductId" />
+            <span>@ViewData["EditState"]</span>
+            <div class="form-group">
+                <label asp-for="Product.ProductName" class="control-label"></label>
+                <input asp-for="Product.ProductName" class="form-control" />
+                <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <label  class="control-label">Category</label>
+                <select asp-for="Product.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <label class="control-label">Price($)</label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <label asp-for="Product.Desciption" class="control-label"></label>
+                <textarea asp-for="Product.Desciption" rows="5" cols="40" class="form-control"></textarea>
+                <span asp-validation-for="Product.Desciption" class="text-danger"></span>
+            </div><br />
+            <div class="form-group" style="margin-bottom:10px">
+                <label class="control-label">Image</label><br />
+                <img src="~/img/product/@Model.Product.Image" alt="" width="150px" height="150px" />
+                <input asp-for="@Model.FilesUpload" type="file" class="form-control" />
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
